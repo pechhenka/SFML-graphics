@@ -1,5 +1,9 @@
 #include "Ball.hpp"
 
+sf::Vector2f Ball::getPosition(){
+	return position;
+}
+
 void Ball::move()
 {
 	position += speed * Global::deltaTime.asSeconds();
@@ -13,6 +17,15 @@ const sf::Drawable& Ball::getDrawable()
 {
 	circle.setPosition(position - offsetPos);
 	return circle;
+}
+
+void Ball::collisionHandling(Ball& a, Ball& b)
+{
+	float radiusSumm = a.radius + b.radius;
+	if (distanceSquared(a.position, b.position) <= radiusSumm * radiusSumm)
+	{
+
+	}
 }
 
 Ball::Ball(const sf::Vector2f& pos, const sf::Vector2f& speed, const sf::Color& color, const float& radius)

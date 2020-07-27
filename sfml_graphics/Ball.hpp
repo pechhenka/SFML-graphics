@@ -2,12 +2,17 @@
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Graphics.hpp>
 #include "Global.hpp"
+#include "Extension/SFML_Vector.hpp"
 
 class Ball
 {
 public:
+	sf::Vector2f getPosition();
+
 	void move();
 	const sf::Drawable& getDrawable();
+
+	static void collisionHandling(Ball& a, Ball& b);
 
 	Ball(const sf::Vector2f& pos, const sf::Vector2f& speed, const sf::Color& color, const float& radius);
 private:
