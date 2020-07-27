@@ -27,7 +27,7 @@ int main()
 	
 	sf::Text fps;
 	sf::Font font;
-	if (!font.loadFromFile("font.ttf"))
+	if (!font.loadFromFile("Arial.ttf"))
 		std::cout << "failed load font" << std::endl;
 	fps.setFont(font);
 	fps.setCharacterSize(36);
