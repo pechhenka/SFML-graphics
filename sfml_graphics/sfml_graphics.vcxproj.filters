@@ -16,6 +16,12 @@
     <Filter Include="Файлы заголовков\Extension">
       <UniqueIdentifier>{ac4602c2-39c1-4f17-a7c0-bf44dcf6037f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы ресурсов\bin-x64">
+      <UniqueIdentifier>{82258cbd-9d14-4fab-af39-879b3acdbef0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы ресурсов\bin-x86">
+      <UniqueIdentifier>{994e8c56-eedb-47ae-adcc-3dd7a7558d34}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -44,5 +50,73 @@
     <ClInclude Include="Extension\SFML_Vector.hpp">
       <Filter>Файлы заголовков\Extension</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin-x64\openal32.dll">
+      <Filter>Файлы ресурсов\bin-x64</Filter>
+    </None>
+    <None Include="bin-x64\sfml-audio-2.dll">
+      <Filter>Файлы ресурсов\bin-x64</Filter>
+    </None>
+    <None Include="bin-x64\sfml-audio-d-2.dll">
+      <Filter>Файлы ресурсов\bin-x64</Filter>
+    </None>
+    <None Include="bin-x64\sfml-graphics-2.dll">
+      <Filter>Файлы ресурсов\bin-x64</Filter>
+    </None>
+    <None Include="bin-x64\sfml-graphics-d-2.dll">
+      <Filter>Файлы ресурсов\bin-x64</Filter>
+    </None>
+    <None Include="bin-x64\sfml-network-2.dll">
+      <Filter>Файлы ресурсов\bin-x64</Filter>
+    </None>
+    <None Include="bin-x64\sfml-network-d-2.dll">
+      <Filter>Файлы ресурсов\bin-x64</Filter>
+    </None>
+    <None Include="bin-x64\sfml-system-2.dll">
+      <Filter>Файлы ресурсов\bin-x64</Filter>
+    </None>
+    <None Include="bin-x64\sfml-system-d-2.dll">
+      <Filter>Файлы ресурсов\bin-x64</Filter>
+    </None>
+    <None Include="bin-x64\sfml-window-2.dll">
+      <Filter>Файлы ресурсов\bin-x64</Filter>
+    </None>
+    <None Include="bin-x64\sfml-window-d-2.dll">
+      <Filter>Файлы ресурсов\bin-x64</Filter>
+    </None>
+    <None Include="bin-x86\openal32.dll">
+      <Filter>Файлы ресурсов\bin-x86</Filter>
+    </None>
+    <None Include="bin-x86\sfml-audio-2.dll">
+      <Filter>Файлы ресурсов\bin-x86</Filter>
+    </None>
+    <None Include="bin-x86\sfml-audio-d-2.dll">
+      <Filter>Файлы ресурсов\bin-x86</Filter>
+    </None>
+    <None Include="bin-x86\sfml-graphics-2.dll">
+      <Filter>Файлы ресурсов\bin-x86</Filter>
+    </None>
+    <None Include="bin-x86\sfml-graphics-d-2.dll">
+      <Filter>Файлы ресурсов\bin-x86</Filter>
+    </None>
+    <None Include="bin-x86\sfml-network-2.dll">
+      <Filter>Файлы ресурсов\bin-x86</Filter>
+    </None>
+    <None Include="bin-x86\sfml-network-d-2.dll">
+      <Filter>Файлы ресурсов\bin-x86</Filter>
+    </None>
+    <None Include="bin-x86\sfml-system-2.dll">
+      <Filter>Файлы ресурсов\bin-x86</Filter>
+    </None>
+    <None Include="bin-x86\sfml-system-d-2.dll">
+      <Filter>Файлы ресурсов\bin-x86</Filter>
+    </None>
+    <None Include="bin-x86\sfml-window-2.dll">
+      <Filter>Файлы ресурсов\bin-x86</Filter>
+    </None>
+    <None Include="bin-x86\sfml-window-d-2.dll">
+      <Filter>Файлы ресурсов\bin-x86</Filter>
+    </None>
   </ItemGroup>
 </Project>
