@@ -1,6 +1,6 @@
 #include "Ball.hpp"
 
-sf::Vector2f Ball::getPosition(){
+sf::Vector2f Ball::getPosition() {
 	return position;
 }
 
@@ -24,7 +24,35 @@ void Ball::collisionHandling(Ball& a, Ball& b)
 	float radiusSumm = a.radius + b.radius;
 	if (distanceSquared(a.position, b.position) <= radiusSumm * radiusSumm)
 	{
+		// n - normal; t - tangent; r - "after the collision"
+		// 1.
+		sf::Vector2f normal = b.position - a.position;
+		sf::Vector2f unitNormal = normal / vector2Length(normal);
+		sf::Vector2f unitTangent(-unitNormal.y, unitNormal.x);
 
+		// 3.
+		float fVan = scalarMultiplication(unitNormal, a.speed);
+		float fVat = scalarMultiplication(unitTangent, a.speed);
+		float fVbn = scalarMultiplication(unitNormal, b.speed);
+		float fVbt = scalarMultiplication(unitTangent, b.speed);
+
+		// 4.
+		float fVatr = fVat;
+		float fVbtr = fVbt;
+
+		// 5.
+		float fVanr = (fVan * (a.weight - b.weight) + 2 * b.weight * fVbn) / (a.weight + b.weight);
+		float fVbnr = (fVbn * (b.weight - a.weight) + 2 * a.weight * fVan) / (a.weight + b.weight);
+
+		// 6.
+		sf::Vector2f Vanr = fVanr * unitNormal;
+		sf::Vector2f Vatr = fVatr * unitTangent;
+		sf::Vector2f Vbnr = fVbnr * unitNormal;
+		sf::Vector2f Vbtr = fVbtr * unitTangent;
+
+		// 7.
+		a.speed = Vanr + Vatr;
+		b.speed = Vbnr + Vbtr;
 	}
 }
 

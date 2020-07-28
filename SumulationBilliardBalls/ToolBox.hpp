@@ -14,9 +14,4 @@ namespace ToolBox
 	float randFloat(const float& min, const float& max); // raturn random float in [min; max]
 	sf::Vector2f randVector2f(const sf::Vector2f& min, const sf::Vector2f& max);
 	Ball randBall(const sf::Vector2f& posSize);
-
-	namespace Physics
-	{
-		float angleSpeed(const sf::Vector2f& speed);
-	};
 };

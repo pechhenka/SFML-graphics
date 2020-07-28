@@ -25,9 +25,9 @@ Ball ToolBox::randBall(const sf::Vector2f& posSize)
 	using namespace sf;
 
 	const float speedMin = 5.f;
-	const float speedMax = 200.f;
+	const float speedMax = 100.f;
 
-	float radius = ToolBox::randFloat(7.f, 150.f);
+	float radius = ToolBox::randFloat(7.f, 20.f);
 
 	Vector2f pos = ToolBox::randVector2f(Vector2f(radius, radius) + 1.f, posSize - (2 * radius - 2.f));
 
@@ -41,9 +41,4 @@ Ball ToolBox::randBall(const sf::Vector2f& posSize)
 	Color color = Color(ToolBox::randInt(10, 240), ToolBox::randInt(10, 240), ToolBox::randInt(10, 240));
 
 	return Ball(pos, speed, color, radius);
-}
-
-float ToolBox::Physics::angleSpeed(const sf::Vector2f& speed)
-{
-	return atan2f(speed.y, speed.x);
 }

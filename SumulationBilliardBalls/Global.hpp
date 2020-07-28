@@ -6,4 +6,7 @@ namespace Global {
 
 	extern sf::Time deltaTime;
 	extern sf::Vector2f windowSize;
+	extern bool DebugMode;
+	extern bool ClearWindow;
+	extern bool InvertBackgroundColor;
 }
