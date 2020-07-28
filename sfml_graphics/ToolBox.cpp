@@ -42,3 +42,8 @@ Ball ToolBox::randBall(const sf::Vector2f& posSize)
 
 	return Ball(pos, speed, color, radius);
 }
+
+float ToolBox::Physics::angleSpeed(const sf::Vector2f& speed)
+{
+	return atan2f(speed.y, speed.x);
+}
