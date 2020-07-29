@@ -4,6 +4,9 @@
 #include "Ball.hpp"
 #include <iostream>
 #include <vector>
+#include "FPSCounter.hpp"
+#include "Extension/SFML_Vector.hpp"
+#include "Extension/SFML_Cursor.hpp"
 
 // 1 pixel = 1 meter
 
@@ -14,7 +17,7 @@ int main()
 	ToolBox::initRandomGeneration();
 
 	ContextSettings settings;
-	settings.antialiasingLevel = 8;
+	settings.antialiasingLevel = 16;
 
 	RenderWindow window(VideoMode::getFullscreenModes()[0], "Balls", Style::Fullscreen, settings);
 	window.setVerticalSyncEnabled(true);
@@ -24,42 +27,58 @@ int main()
 	for (int i = 0; i < 100; i++)
 		balls.push_back(ToolBox::randBall(Global::windowSize));
 
-
-	sf::Text fps;
-	sf::Font font;
-	if (!font.loadFromFile("Arial.ttf"))
+	sf::Font Arial_font;
+	if (!Arial_font.loadFromFile("Arial.ttf"))
 	{
 #ifdef _IOSTREAM_
 		std::cout << "failed load font" << std::endl;
 #endif
 	}
 
-	fps.setFont(font);
-	fps.setCharacterSize(36);
-	fps.setFillColor(Color::Red);
+	FPSCounter FPS_counter(0.15f);
+	sf::Text FPS_text;
+	FPS_text.setFont(Arial_font);
+	FPS_text.setCharacterSize(36);
+	FPS_text.setFillColor(Color::Red);
+
+	SFML_Cursor cur(&window);
 
 	sf::Clock clock;
 	while (window.isOpen())
 	{
 		Global::deltaTime = clock.restart();
-		if (Global::DebugMode)
-			fps.setString(std::to_string((int)(1.f / Global::deltaTime.asSeconds())));
+		if (Global::onStatistics)
+			FPS_text.setString(std::to_string(FPS_counter.getFPS(Global::deltaTime)));
 
 		Event event;
 		while (window.pollEvent(event))
 		{
-			if ((event.type == Event::Closed) || (event.type == Event::KeyReleased && event.key.code == sf::Keyboard::Escape))
+			if ((event.type == Event::Closed) || (event.type == Event::KeyReleased && event.key.code == Keyboard::Escape))
 				window.close();
-			if (event.type == Event::KeyReleased && event.key.code == sf::Keyboard::LControl)
-				Global::DebugMode = !Global::DebugMode;
-			if (event.type == Event::KeyReleased && event.key.code == sf::Keyboard::Tab)
-				Global::ClearWindow = !Global::ClearWindow;
-			if (event.type == Event::KeyReleased && event.key.code == sf::Keyboard::I)
-				Global::InvertBackgroundColor = !Global::InvertBackgroundColor;
+			if (event.type == Event::KeyReleased)
+			{
+				if (event.key.code == Keyboard::LControl || event.key.code == Keyboard::RControl)
+					Global::linesBethBalls = !Global::linesBethBalls;
+				if (event.key.code == Keyboard::Tab)
+					Global::ClearWindow = !Global::ClearWindow;
+				if (event.key.code == Keyboard::D)
+					Global::drawBalls = !Global::drawBalls;
+				if (event.key.code == Keyboard::I)
+					Global::InvertBackgroundColor = !Global::InvertBackgroundColor;
+				if (event.key.code == Keyboard::S)
+					Global::onStatistics = !Global::onStatistics;
+			}
+			if (event.type == Event::KeyPressed)
+			{
+				if (event.key.code == Keyboard::Add)
+					balls.push_back(ToolBox::randBall(Global::windowSize));
+				if (event.key.code == Keyboard::Subtract && !balls.empty())
+					balls.pop_back();
+			}
 		}
 
 		if (Global::ClearWindow)
-			window.clear(Global::InvertBackgroundColor ? Color::Black : Color::White);
+			window.clear(Global::InvertBackgroundColor ? Color(28, 28, 32) : Color(248, 248, 240));
 
 		size_t ballsSize = balls.size();
 		for (size_t i = 0; i < ballsSize; i++)
@@ -68,7 +87,7 @@ int main()
 		for (size_t i = 0; i < ballsSize; i++)
 			for (size_t j = i + 1; j < ballsSize; j++)
 			{
-				if (Global::DebugMode)
+				if (Global::linesBethBalls)
 				{
 					sf::Vertex line[] = {
 						sf::Vertex(balls[i].getPosition()),
@@ -81,11 +100,29 @@ int main()
 				Ball::collisionHandling(balls[i], balls[j]);
 			}
 
-		for (size_t i = 0; i < ballsSize; i++)
-			window.draw(balls[i].getDrawable());
+		Vector2i mouse = Mouse::getPosition();
+		bool flag = false;
+		if (Global::drawBalls)
+			for (size_t i = 0; i < ballsSize; i++)
+			{
+				if (!flag && distanceSquared<float>(balls[i].getPosition(), mouse) <= balls[i].getRadiusSquared())
+					flag = true;
+				window.draw(balls[i].getDrawable());
+			}
 
-		if (Global::DebugMode)
-			window.draw(fps);
+		/*if (flag)
+			cur.setCursorType(Cursor::Type::SizeAll);
+		else
+			cur.setCursorType(Cursor::Type::Arrow);*/
+
+		if (Global::onStatistics)
+		{
+			/*FloatRect br = FPS_text.getGlobalBounds();
+			sf::RectangleShape background(sf::Vector2f(br.width, br.height));
+			background.setFillColor(Color(128,128,128));
+			window.draw(background, FPS_text.getTransform());*/
+			window.draw(FPS_text);
+		}
 		window.display();
 	}
 

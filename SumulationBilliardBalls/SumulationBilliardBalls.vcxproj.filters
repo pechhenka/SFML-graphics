@@ -22,6 +22,9 @@
     <Filter Include="Файлы ресурсов\bin-x86">
       <UniqueIdentifier>{994e8c56-eedb-47ae-adcc-3dd7a7558d34}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Исходные файлы\Extension">
+      <UniqueIdentifier>{1ca0618f-008b-4367-b362-58aee6385805}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -36,6 +39,12 @@
     <ClCompile Include="ToolBox.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="FPSCounter.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Extension\SFML_Cursor.cpp">
+      <Filter>Исходные файлы\Extension</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.hpp">
@@ -48,6 +57,12 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Extension\SFML_Vector.hpp">
+      <Filter>Файлы заголовков\Extension</Filter>
+    </ClInclude>
+    <ClInclude Include="FPSCounter.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Extension\SFML_Cursor.hpp">
       <Filter>Файлы заголовков\Extension</Filter>
     </ClInclude>
   </ItemGroup>

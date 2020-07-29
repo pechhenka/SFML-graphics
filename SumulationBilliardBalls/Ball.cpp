@@ -4,6 +4,11 @@ sf::Vector2f Ball::getPosition() {
 	return position;
 }
 
+float Ball::getRadiusSquared()
+{
+	return radiusSquared;
+}
+
 void Ball::move()
 {
 	position += speed * Global::deltaTime.asSeconds();
@@ -66,5 +71,6 @@ Ball::Ball(const sf::Vector2f& pos, const sf::Vector2f& speed, const sf::Color& 
 	position = pos;
 	this->speed = speed;
 	this->radius = radius;
+	radiusSquared = radius * radius;
 	weight = radius * radius; // reduction from M_PI * (radius ** 2)
 }

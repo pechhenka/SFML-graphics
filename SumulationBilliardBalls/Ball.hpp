@@ -8,6 +8,7 @@ class Ball
 {
 public:
 	sf::Vector2f getPosition();
+	float getRadiusSquared();
 
 	void move();
 	const sf::Drawable& getDrawable();
@@ -20,6 +21,7 @@ private:
 	sf::Vector2f position; // Circle center (m)
 	sf::Vector2f speed; // m/s
 	float radius;
+	float radiusSquared;
 
 	sf::Vector2f offsetPos;
 	float weight;

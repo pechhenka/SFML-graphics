@@ -23,6 +23,16 @@ inline T distanceSquared(const sf::Vector2<T>& a, const sf::Vector2<T>& b) {
 	return distX * distX + distY * distY;
 }
 
+template<
+	typename T,
+	typename T1,
+	typename T2>
+inline T distanceSquared(const sf::Vector2<T1>& a, const sf::Vector2<T2>& b) {
+	T distX = a.x - b.x;
+	T distY = a.y - b.y;
+	return distX * distX + distY * distY;
+}
+
 template<typename T>
 inline T scalarMultiplication(const sf::Vector2<T>& a, const sf::Vector2<T>& b) {
 	return a.x * b.x + a.y * b.y;

@@ -177,13 +177,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="Extension\SFML_Cursor.cpp" />
+    <ClCompile Include="FPSCounter.cpp" />
     <ClCompile Include="Global.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ToolBox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.hpp" />
+    <ClInclude Include="Extension\SFML_Cursor.hpp" />
     <ClInclude Include="Extension\SFML_Vector.hpp" />
+    <ClInclude Include="FPSCounter.hpp" />
     <ClInclude Include="Global.hpp" />
     <ClInclude Include="ToolBox.hpp" />
   </ItemGroup>
