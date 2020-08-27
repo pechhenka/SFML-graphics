@@ -27,8 +27,18 @@ const sf::Drawable& Ball::getDrawable()
 void Ball::collisionHandling(Ball& a, Ball& b)
 {
 	float radiusSumm = a.radius + b.radius;
-	if (distanceSquared(a.position, b.position) <= radiusSumm * radiusSumm)
+	auto processed = std::find(a.processedBalls.begin(), a.processedBalls.end(), &b);
+	bool impactDistance = distanceSquared(a.position, b.position) <= radiusSumm * radiusSumm;
+	if (!impactDistance) {
+		if (processed != a.processedBalls.end())
+		{
+			a.processedBalls.erase(processed);
+			return;
+		}
+	}
+	else if (impactDistance && processed == a.processedBalls.end())
 	{
+		a.processedBalls.push_front(&b);
 		// n - normal; t - tangent; r - "after the collision"
 		// 1.
 		sf::Vector2f normal = b.position - a.position;
@@ -73,4 +83,13 @@ Ball::Ball(const sf::Vector2f& pos, const sf::Vector2f& speed, const sf::Color& 
 	this->radius = radius;
 	radiusSquared = radius * radius;
 	weight = radius * radius; // reduction from M_PI * (radius ** 2)
+	processedBalls.clear();
+}
+
+void Ball::externalBallDeleted()
+{
+	for (auto it = this->processedBalls.begin(); it != this->processedBalls.end(); it++) {
+		if (*it == nullptr)
+			this->processedBalls.erase(it);
+	}
 }

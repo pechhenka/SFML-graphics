@@ -8,8 +8,12 @@ bool ToolBox::randBool() {
 	return rand() % 2 == 0;
 }
 
-int ToolBox::randInt(const int& min, const int& max) {
+int ToolBox::randIntIncl(const int& min, const int& max) {
 	return min + (rand() % (max - min + 1));
+}
+
+int ToolBox::randIntIncl(const int& max) {
+	return rand() % (max + 1);
 }
 
 float ToolBox::randFloat(const float& min, const float& max) {
@@ -38,7 +42,7 @@ Ball ToolBox::randBall(const sf::Vector2f& posSize)
 		Vector2f(flagSignSpeed[0] ? speedMax : -speedMax,
 			flagSignSpeed[1] ? speedMax : -speedMax));
 
-	Color color = Color(ToolBox::randInt(10, 240), ToolBox::randInt(10, 240), ToolBox::randInt(10, 240));
+	Color color = Color(ToolBox::randIntIncl(10, 240), ToolBox::randIntIncl(10, 240), ToolBox::randIntIncl(10, 240));
 
 	return Ball(pos, speed, color, radius);
 }

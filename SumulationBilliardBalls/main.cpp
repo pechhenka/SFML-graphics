@@ -7,11 +7,17 @@
 #include "FPSCounter.hpp"
 #include "Extension/SFML_Vector.hpp"
 #include "Extension/SFML_Cursor.hpp"
+#include "ToolBox.hpp"
+#include <algorithm>
 
 // 1 pixel = 1 meter
 
-int main()
+int main(/*int argc, char* argv[]*/)
 {
+	/*std::cout << "Count args: " << argc << std::endl;
+	for (int i = 0; i < argc; i++)
+		std::cout << i << ") " << argv[i] << std::endl;*/
+
 	using namespace sf;
 
 	ToolBox::initRandomGeneration();
@@ -70,10 +76,17 @@ int main()
 			}
 			if (event.type == Event::KeyPressed)
 			{
-				if (event.key.code == Keyboard::Add)
+				if (event.key.code == Keyboard::Add || event.key.code == Keyboard::Equal)
 					balls.push_back(ToolBox::randBall(Global::windowSize));
-				if (event.key.code == Keyboard::Subtract && !balls.empty())
+				if ((event.key.code == Keyboard::Subtract || event.key.code == Keyboard::Hyphen) && !balls.empty())
+				{
+					size_t lastBall = balls.size() - 1;
+					std::swap(balls[lastBall], balls[ToolBox::randIntIncl(lastBall)]);
 					balls.pop_back();
+					size_t ballsSize = balls.size();
+					for (size_t i = 0; i < ballsSize; i++)
+						balls[i].externalBallDeleted();
+				}
 			}
 		}
 
